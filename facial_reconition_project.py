@@ -3,15 +3,15 @@ import face_recognition as fr
 import cv2
 import os
 
-# face detect through camera feed
+# Face detect through camera feed
 video_capture = cv2.VideoCapture(0)
 
-# data set creation
+# Data set creation
 folder_path = "images/"
 known_face_encodings = []
 known_face_names = []
 
-# data set population
+# Data set population
 for filename in os.listdir(folder_path):
     file_path = os.path.join(folder_path, filename)
     if os.path.isfile(file_path):
@@ -19,7 +19,7 @@ for filename in os.listdir(folder_path):
         known_face_names.append(filename[:-4])
         known_face_encodings.append(fr.face_encodings(face_in_camera)[0])
 
-#feature extraction
+# Feature extraction
 while True: 
     ret, frame = video_capture.read()
 
@@ -29,7 +29,7 @@ while True:
     face_encodings = fr.face_encodings(rgb_frame, face_locations)
 
 
-# comparing faces
+# Comparing faces
     for (top, right, bottom, left), face_encoding in zip(face_locations, face_encodings):
 
         matches = fr.compare_faces(known_face_encodings, face_encoding)
